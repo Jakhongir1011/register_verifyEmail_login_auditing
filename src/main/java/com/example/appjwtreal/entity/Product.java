@@ -1,0 +1,44 @@
+package com.example.appjwtreal.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.sql.Timestamp;
+import java.util.UUID;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity
+@EntityListeners(AuditingEntityListener.class)// tablga bolyapkan ozgarishlarni eshitib turadi kuzatib turadi
+public class Product {
+
+    @Id
+    @GeneratedValue
+    private UUID id; // maxsulotni takrorlanmas qismi
+
+    private String name;
+
+    @CreatedBy
+    private UUID createBy; // kim qoshkanligi
+
+    @LastModifiedBy
+    private UUID updateBy; // kim tahrirlagani
+
+    @CreationTimestamp
+    private Timestamp createAt;
+
+    @UpdateTimestamp
+    private Timestamp updateAt;
+
+}
